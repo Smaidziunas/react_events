@@ -2,47 +2,56 @@
 TASK Two
 Create a form (GreetingForm component with minimal style) which has fields for name and surname. After form fields are filled and submit button click, form below must display greeting like “Hello, John Smith”
 */
+import { useState } from 'react';
 
 import Txt from './Txt';
 
 export default function GreetingForm() {
-  let arr = {};
+  const [inputName, setinputName] = useState('');
+  const [inputLastName, setinputLastName] = useState('');
+
+  const [showGreeting, setshowGreeting] = useState('');
+  const [textName, settextName] = useState('');
+  const [textLstName, settextLstName] = useState('');
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    setinputName('');
+    setinputLastName('');
+
+    setshowGreeting('show');
+    settextName(inputName);
+    settextLstName(inputLastName);
+
+    console.log('submit ivyko');
+  };
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          // console.log(e.target.surname.value);
-
-          const name = e.target.name.value;
-          const surname = e.target.surname.value;
-
-          let arr = {};
-          arr.name = e.target.name.value;
-          arr.surname = e.target.surname.value;
-          // console.log(arr);
-
-          return (
-            <Txt
-              name={document.getElementById('name').value}
-              surname={document.getElementById('surname').value}
-            />
-          );
-        }}
-      >
-        <div>
-          <label htmlFor='name'>Name</label>
-          <input type='text' id='name' />
-        </div>
-        <div>
-          <label htmlFor='surname'>Last Name</label>
-          <input type='text' id='surname' />
-        </div>
-        <div>
-          <input type='submit' />
-          {/* <input type='reset' /> */}
-        </div>
-      </form>
-    </>
+    <form onSubmit={submitHandler}>
+      <div>
+        <label>Name</label>
+        <input
+          name='username'
+          type='text'
+          id='name'
+          onChange={(event) => setinputName(event.target.value)}
+          value={inputName}
+        />
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          name='lastname'
+          type='text'
+          id='surname'
+          onChange={(event) => setinputLastName(event.target.value)}
+          value={inputLastName}
+        />
+      </div>
+      <div>
+        <button type='submit'>Submit form</button>
+      </div>
+      <Txt cl={showGreeting} name={textName} surname={textLstName} />
+    </form>
   );
 }

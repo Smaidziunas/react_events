@@ -1,5 +1,18 @@
 /* Mobile */
 
+.show {
+  display: block;
+}
+
+.txtDiv {
+ display: none; 
+}
+
+.txtDiv.show {
+  display: block;
+}
+  
+
   .header {
     height: calc(100vh/6);
   }
